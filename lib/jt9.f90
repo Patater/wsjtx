@@ -502,13 +502,10 @@ program jt9
 
 ! Save FFTW wisdom and free memory
   if(len(trim(wisfile)).gt.0) iret=fftwf_export_wisdom_to_filename(wisfile)
-  if(mode.eq.8 .and. shared_data%params%lmultift8) then
-     call four2avar(a,-1,1,1,1)
-     call filbigvar(-1.,0,0.,0,0.,0.,0)       !used for FFT plans for FT8 multithread detector
-  else
-     call four2a(a,-1,1,1,1)
-     call filbig(a,-1,1,0.0,0,0,0,0,0)        !used for all other FFT plans
-  endif
+  call four2avar(a,-1,1,1,1)
+  call filbigvar(-1.,0,0.,0,0.,0.,0)       !used for FFT plans for FT8 multithread detector
+  call four2a(a,-1,1,1,1)
+  call filbig(a,-1,1,0.0,0,0,0,0,0)        !used for all other FFT plans
   call fftwf_cleanup_threads()
   call fftwf_cleanup()
 
